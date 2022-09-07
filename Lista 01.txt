@@ -1,0 +1,102 @@
+Questão 01 Quais serão os valores de x, y e p ao final do trecho de código abaixo:
+int x, y, *p;y = 0; p = &y; x = *p; x = 4; (*p)++; --x; (*p) += x;
+
+Questão 03 Qual será a saída exibida pelo programa a seguir:
+#include <stdio.h>
+int main(void) {
+ int a, b, c;
+ int *p1;
+ int *p2 = &a;
+ int *p3 = &c;
+ p1 = p2;
+ *p2 = 10;
+ b = 20;
+ int **pp;
+ pp = &p1;
+ *p3 = **pp;
+ *p2 = b + (*p1)++;
+ printf("%d\t%d\t%d\n", a, b, c);
+ return 0;
+}
+
+Questão 02:
+Se tentarmos compilar o programa (não o compile ainda), você acha que o compilador 
+nos fornece alguma mensagem? Se sim, responda:
+a) Esta mensagem é de erro ou advertência?
+b) Por que o compilador emite tal mensagem?
+c) Compile e execute o programa. A execução foi bem sucedida?
+d) Modifique o trecho de código acima, de modo que nenhuma mensagem seja 
+emitida pelo compilador.
+e) Compile e execute novamente o programa. A execução foi bem sucedida?
+
+Letra A) Erro
+Letra B) que as funções não foram declaradas 
+Letra C) não
+Letra D) faltava o &
+
+Questão 04:
+ Crie um programa para calcular a área e o perímetro de um hexágono. O seu programa 
+deve implementar uma função chamada calcula_hexagono que calcule a área e o 
+perímetro de um hexágono regular de lado l. A função deve obedecer ao seguinte 
+protótipo: void calcula_hexagono(float l, float *area, float *perimetro); A área e o 
+perímetro de um hexágono regular são dados, respectivamente, por:
+
+#include <stdio.h>
+#include <math.h>
+
+ void calcula_hexagono (float l, float *area, float *perimetro) {
+	 
+  *area=((3)*(pow(l,2)) * sqrt(3)) / 2;
+  *perimetro=6*l;
+  //** foi feita a função com os comandos sqrt para determinar a função e o pow para determinar a formula
+ }
+  void main(){
+	  float area;
+	  float perimetro;
+	  float l;
+	  printf(" Digite o valor do lado \n");
+	  scanf("%f",&l);
+	  
+	  calcula_hexagono(l,&area, &perimetro);
+	  printf("o valor do perimetro= %f, area %f",perimetro, area);
+	  
+  }
+
+Questão 05
+#include <stdio.h>
+#include <math.h>
+/*Questão 05:Escreva uma função que determine a média e a situação de um aluno em uma disciplina. 
+A função deve obedecer ao seguinte protótipo: char situacao(float p1, float p2, float p3, 
+int faltas, int aulas, float *media); Na variável indicada pelo ponteiro media, a função 
+deve armazenar a média do aluno, calculada como a média aritmética das três provas */
+char situacao(float p1, float p2, float p3, int faltas, int aulas, float *media) 
+{
+float percentual_faltas = faltas*100/(float)aulas;
+float med = (p1+p2+p3)/3;
+*media = med;
+/* mais que 25% de faltas */
+if (percentual_faltas > 25)
+return 'F';
+else
+{
+/* media maior ou igual 6,0 */
+if (med >= 6.0) return 'A';
+
+else return 'R';
+}
+}
+
+int main(void)
+{
+float p1, p2, p3;
+int aulas, faltas;
+char sit;
+float media;
+scanf("%f %f %f %d %d", &p1, &p2, &p3, &faltas, &aulas);
+sit = situacao(p1, p2, p3, faltas, aulas, &media);
+
+if (sit == 'A') printf("\n%.1f APROVADO\n\n", media);
+else if (sit == 'R') printf("\n%.1f REPROVADO\n\n", media);
+else printf("\n%.1f REPROVADO POR FALTA\n\n", media);
+return 0;
+}
