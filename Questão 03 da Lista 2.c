@@ -1,6 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
-
+/*Questão 03 - Implemente uma função que preencha um vetor alocado dinamicamente de N
+elementos com valores inteiros fornecidos pelo o usuário, de modo que, à medida que um
+novo elemento é inserido, o vetor já permaneça organizado de maneira ordenada
+crescente. Escreva um programa que utiliza esta função, que deve obedecer ao seguinte
+protótipo: void preenche_ordenado(int n, int *v);*/
 void preenche_ordenado(int n, int *v);
 
 int main (void){
