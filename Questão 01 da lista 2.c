@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
-
+/*Questão 1) Faça um programa que acha o maior e o menor inteiro dentro de um vetor de
+N inteiros, calcule a soma e imprime a soma. Fazer a alocação dinâmica do vetor e após
+seu uso liberar a memória alocada.*/
 int main(int argc, char** argv)
 {
 	int i, q_elemnetos; 
@@ -9,7 +11,7 @@ int main(int argc, char** argv)
 	int maior, menor;
 	printf("digite a quantidade de elemntos do vetor: ");
 	scanf("%d", &q_elemnetos);
-	p = (int *) malloc(q_elemnetos * sizeof(int)); // olaca�ao de memoria pra o vetor que vou usar
+	p = (int *) malloc(q_elemnetos * sizeof(int)); // olacaçao de memoria pra o vetor que vou usar
 	if(p == NULL)
 	{
 		printf("erro na alocacao\n");
