@@ -1,72 +1,64 @@
 #include <stdio.h>
-#include <stdlib.h>
-    /*Questão 1) Considere a manipulação de matrizes quadradas de inteiros e a representação de
-matrizes em C por vetor simples e vetor de ponteiros. */
-      void lerMatriz(int *mat, int m, int n)
-     {
-        // incremento do endereço contido na variável auxiliar
-         int i, j, *pMat;
-         pMat = mat;
-         for (i = 0; i < m; i = i + 1)
-            for (j = 0; j < n; j = j + 1) 
-            scanf("%d", pMat++);
-     }
-   
-      void somarMatrizes(int *a, int *b, int *c, int m, int n)
-     {
-         int i, j, *pA = a, *pB = b, *pC = c;
-         for (i = 0; i < m; i = i + 1)
-         for (j = 0; j < n; j = j + 1) *pC++ = *pA++ + *pB++;
-     }
-    
-     void escreverMatriz(int *mat, int m, int n)
-     {
-         // base (mat) mais deslocamento (i * m + j)
-         int i, j, *pMat;
-         pMat = mat;
-         for (i = 0; i < m; i = i + 1)
-        {
-            for (j = 0; j < n; j = j + 1) printf("%3d", *(pMat + i *n + j));
-           printf("\n");
-        }
-     }
-     
-    
-   
-      void SubMatrizes(int *a, int *b, int *c, int m, int n)
-     {
-         int i, j, *pA = a, *pB = b, *pC = c;
-         for (i = 0; i < m; i = i + 1)
-         for (j = 0; j < n; j = j + 1) *pC++ = *pA++ - *pB++;
-     }
-    
+#include <locale.h>
 
-   
-      void MultiMatrizes(int *a, int *b, int *c, int m, int n)
-     {
-         int i, j, *pA = a, *pB = b, *pC = c;
-         for (i = 0; i < m; i = i + 1)
-         for (j = 0; j < n; j = j + 1) *pC++ = *pA++ * *pB++;
-     }
-    
- 
-  
-      int main(void)
-      {
-         int m, n, *m1, *m2, *m3;
-         scanf("%d", &m);
-         scanf("%d", &n);
-         m1 = malloc(sizeof(int) * m * n);
-         m2 = malloc(sizeof(int) * m * n);
-         m3 = malloc(sizeof(int) * m * n);
-         lerMatriz(m1, m, n);
-         escreverMatriz(m1, m, n);
-         lerMatriz(m2, m, n);
-         escreverMatriz(m2, m, n);
-         printf("\n");
-         somarMatrizes(m1, m2, m3, m, n);
-         SubMatrizes(m1, m2, m3, m, n);
-         MultiMatrizes(m1, m2, m3,m,n);
-         escreverMatriz(m3, m, n);
-        return 0;
-      }
+/*Questão 1) Crie um tipo estruturado para armazenar dados de um ingresso. Uma estrutura deste tipo possui os
+seguintes campos: preço, local e atração. */
+typedef struct Ingresso{
+     char atracao[50];
+     char local[50];
+     float preco;
+} Ingresso;
+
+void preenche(Ingresso* i) 
+{  
+    printf("valor:");
+	scanf("%f",&i->preco);
+	printf("Atração:\n");
+	scanf("%[^\n]",&i->atracao);
+	printf("\nLocal:");
+	scanf("%[^\n]",&i->local);
+}
+
+
+ void imprime(Ingresso* i) {
+printf("O preço é %.2f reais \nNo local %s \nCom atração %s \n",
+i->preco,i->local,i->atracao);
+}
+
+void altera_preco(Ingresso* i){
+float valor;
+printf("Altere o preço do ingresso \n");
+scanf("%f", &valor);
+i->preco = valor;
+}
+void imprime_menor_maior_preco(int n, Ingresso* vet){
+int i;
+int menor=0, maior=0;
+for (i = 0; i < n; i++) {
+if (vet[i].preco > vet[maior].preco) {
+maior = i;
+}
+if (vet[i].preco < vet[menor].preco) {
+menor = i;
+}
+}
+printf("O ingresso com eventos mais caros é o com a atração %s", vet[maior].atracao);
+printf(" e o ingresso com eventos mais barato é o com a atração %s", vet[menor].atracao);
+}
+int main(){
+setlocale(LC_ALL, "portuguese");
+int n;
+int i;
+printf("Quantos ingressos deseja comprar ? \n");
+scanf("%d", &n);
+Ingresso vet[n];
+for (i = 0; i < n; i++) {
+preenche(&vet[i]);
+}
+for (i = 0; i < n; i++) {
+imprime(&vet[i]);
+}
+altera_preco(&vet[0]);
+imprime_menor_maior_preco(n, vet);
+return 0;
+}
